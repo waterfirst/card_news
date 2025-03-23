@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윤석열 대통령 계엄령 선포부터 탄핵 심판까지</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+        }
+        
+        .card-slider {
+            width: 100%;
+            height: 600px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        
+        .card.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .card-content {
+            padding: 32px;
+            flex: 1;
+            color: white;
+        }
+        
+        .card-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .card-subtitle {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .card-description {
+            font-size: 18px;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+        
+        .card-emoji {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 180px;
+            font-size: 80px;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-navigation {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        
+        .nav-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .card-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+        }
+        
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .indicator.active {
+            width: 24px;
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        .status {
+            margin-top: 16px;
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        /* 각 카드의 그라데이션 배경 */
+        #card-0 {
+            background: linear-gradient(135deg, #1E1E1E 0%, #383838 100%);
+        }
+        
+        #card-1 {
+            background: linear-gradient(135deg, #D40000 0%, #FF5959 100%);
+        }
+        
+        #card-2 {
+            background: linear-gradient(135deg, #FF4757 0%, #FF6B81 100%);
+        }
+        
+        #card-3 {
+            background: linear-gradient(135deg, #FF6B00 0%, #FFA559 100%);
+        }
+        
+        #card-4 {
+            background: linear-gradient(135deg, #5352ED 0%, #7B7DFD 100%);
+        }
+        
+        #card-5 {
+            background: linear-gradient(135deg, #2ED573 0%, #7BED8A 100%);
+        }
+        
+        #card-6 {
+            background: linear-gradient(135deg, #1E90FF 0%, #70A1FF 100%);
+        }
+        
+        #card-7 {
+            background: linear-gradient(135deg, #A742F5 0%, #C17EFF 100%);
+        }
+        
+        #card-8 {
+            background: linear-gradient(135deg, #FD7272 0%, #FEA47F 100%);
+        }
+        
+        #card-9 {
+            background: linear-gradient(135deg, #FF5E57 0%, #FF9068 100%);
+        }
+        
+        #card-10 {
+            background: linear-gradient(135deg, #3498DB 0%, #82CCDD 100%);
+        }
+        
+        #card-11 {
+            background: linear-gradient(135deg, #8C7AE6 0%, #BFA9FF 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card-slider">
+            <!-- 카드 1 - 소개 -->
+            <div class="card active" id="card-0">
+                <div class="card-content">
+                    <h2 class="card-title">윤석열 대통령 계엄령 선포부터 탄핵 심판까지</h2>
+                    <h3 class="card-subtitle">2024년 12월 3일부터 2025년 3월 23일까지</h3>
+                    <p class="card-description">대한민국 헌정사의 중요한 시기, 윤석열 대통령의 계엄령 선포부터 탄핵 심판 과정까지의 주요 일정을 정리했습니다.</p>
+                </div>
+                <div class="card-emoji">📅</div>
+            </div>
+            
+            <!-- 카드 2 - 2024년 12월 3일 -->
+            <div class="card" id="card-1">
+                <div class="card-content">
+                    <h2 class="card-title">2024년 12월 3일</h2>
+                    <h3 class="card-subtitle">비상계엄 선포</h3>
+                    <p class="card-description">윤석열 대통령이 22시 23분경 용산 대통령실에서 긴급 브리핑을 통해 '종북과 반국가세력을 척결하고 자유대한민국을 수호하겠다'는 명분으로 전국 단위의 비상계엄을 선포했습니다.</p>
+                </div>
+                <div class="card-emoji">⚠️</div>
+            </div>
+            
+            <!-- 카드 3 - 2024년 12월 4일 새벽 1시경 -->
+            <div class="card" id="card-2">
+                <div class="card-content">
+                    <h2 class="card-title">2024년 12월 4일 새벽 1시경</h2>
+                    <h3 class="card-subtitle">국회의 계엄해제 결의안 통과</h3>
+                    <p class="card-description">국회에 있던 여야 의원들이 계엄군의 방해에도 불구하고 만장일치로 계엄령 해제 결의안을 통과시켰습니다. 이는 계엄령 선포 약 2시간 35분 만의 일이었습니다.</p>
+                </div>
+                <div class="card-emoji">🏛️</div>
+            </div>
+            
+            <!-- 카드 4 - 2024년 12월 4일 오전 4시 30분 -->
+            <div class="card" id="card-3">
+                <div class="card-content">
+                    <h2 class="card-title">2024년 12월 4일 오전 4시 30분</h2>
+                    <h3 class="card-subtitle">비상계엄 해제 선언</h3>
+                    <p class="card-description">윤석열 대통령이 비상계엄 해제를 선언했습니다. 계엄군이 철수하기 시작했으며, 선포 후 약 6시간 만에 비상계엄이 종료되었습니다.</p>
+                </div>
+                <div class="card-emoji">🚫</div>
+            </div>
+            
+            <!-- 카드 5 - 2024년 12월 4일 이후 -->
+            <div class="card" id="card-4">
+                <div class="card-content">
+                    <h2 class="card-title">2024년 12월 4일 이후</h2>
+                    <h3 class="card-subtitle">탄핵 요구 집회 확산</h3>
+                    <p class="card-description">비상계엄 해제 이후 윤석열 대통령은 공식 일정을 전면 취소했으며, 전국에서 윤석열 대통령 탄핵을 요구하는 집회가 확산되기 시작했습니다.</p>
+                </div>
+                <div class="card-emoji">📢</div>
+            </div>
+            
+            <!-- 카드 6 - 2024년 12월 14일 -->
+            <div class="card" id="card-5">
+                <div class="card-content">
+                    <h2 class="card-title">2024년 12월 14일</h2>
+                    <h3 class="card-subtitle">탄핵소추안 의결</h3>
+                    <p class="card-description">국회에서 윤석열 대통령에 대한 탄핵소추안이 가결되었습니다. 헌법재판소 사건번호 '2024헌나8'이 부여되었으며, 전국 59곳에서 탄핵 촉구 집회가 열렸습니다.</p>
+                </div>
+                <div class="card-emoji">📝</div>
+            </div>
+            
+            <!-- 카드 7 - 2024년 12월~2025년 2월 -->
+            <div class="card" id="card-6">
+                <div class="card-content">
+                    <h2 class="card-title">2024년 12월~2025년 2월</h2>
+                    <h3 class="card-subtitle">헌법재판소 심리 진행</h3>
+                    <p class="card-description">헌법재판소는 탄핵소추안 가결 이후 심리를 진행했으며, 매주 화요일과 목요일에 변론기일을 지정하여 심판을 진행했습니다.</p>
+                </div>
+                <div class="card-emoji">⚖️</div>
+            </div>
+            
+            <!-- 카드 8 - 2025년 2월 21일 -->
+            <div class="card" id="card-7">
+                <div class="card-content">
+                    <h2 class="card-title">2025년 2월 21일</h2>
+                    <h3 class="card-subtitle">대통령 직접 출석</h3>
+                    <p class="card-description">윤석열 대통령이 헌재의 탄핵심판 3차 변론에 현직 대통령으로는 처음으로 직접 출석했습니다.</p>
+                </div>
+                <div class="card-emoji">👨‍💼</div>
+            </div>
+            
+            <!-- 카드 9 - 2025년 2월 25일 -->
+            <div class="card" id="card-8">
+                <div class="card-content">
+                    <h2 class="card-title">2025년 2월 25일</h2>
+                    <h3 class="card-subtitle">변론 종결</h3>
+                    <p class="card-description">헌법재판소의 윤석열 대통령 탄핵 심판 마지막 변론이 마무리되었습니다. 이는 국회에서 탄핵소추안이 가결된 지 73일 만의 일이었으며, 총 11차례의 변론이 진행되었습니다.</p>
+                </div>
+                <div class="card-emoji">🔨</div>
+            </div>
+            
+            <!-- 카드 10 - 2025년 3월 13일 -->
+            <div class="card" id="card-9">
+                <div class="card-content">
+                    <h2 class="card-title">2025년 3월 13일</h2>
+                    <h3 class="card-subtitle">다른 탄핵 사건 먼저 선고</h3>
+                    <p class="card-description">헌재는 최재해 감사원장과 이창수 서울중앙지검장 등 검사 3인 탄핵심판을 선고했습니다. 당초 윤석열 대통령 탄핵심판을 최우선으로 심리하겠다고 했지만, 다른 사건들의 결론이 먼저 나오게 되었습니다.</p>
+                </div>
+                <div class="card-emoji">📊</div>
+            </div>
+            
+            <!-- 카드 11 - 2025년 3월 19일 -->
+            <div class="card" id="card-10">
+                <div class="card-content">
+                    <h2 class="card-title">2025년 3월 19일</h2>
+                    <h3 class="card-subtitle">선고일 지연 논란</h3>
+                    <p class="card-description">헌법재판소의 윤석열 대통령 탄핵심판 선고가 기약 없이 늦어지자 더불어민주당은 '숙고의 시간을 넘어 지연의 시간으로 가고 있다'며 선고기일 지정 신청과 헌재 사무처장 국회 출석 요구 등의 압박을 시도했습니다.</p>
+                </div>
+                <div class="card-emoji">⏱️</div>
+            </div>
+            
+            <!-- 카드 12 - 2025년 3월 23일 -->
+            <div class="card" id="card-11">
+                <div class="card-content">
+                    <h2 class="card-title">2025년 3월 23일</h2>
+                    <h3 class="card-subtitle">현재 상황</h3>
+                    <p class="card-description">변론 종결 21일이 지났음에도 헌재가 선고기일을 지정하지 않고 있어 논란이 계속되고 있습니다. 현재까지 윤석열 대통령 탄핵 심판의 정확한 선고일은 아직 지정되지 않은 상태입니다.</p>
+                </div>
+                <div class="card-emoji">❓</div>
+            </div>
+            
+            <!-- 탐색 버튼 -->
+            <div class="card-navigation">
+                <button class="nav-btn" id="prev-btn">←</button>
+                <button class="nav-btn" id="next-btn">→</button>
+            </div>
+            
+            <!-- 인디케이터 -->
+            <div class="card-indicators">
+                <span class="indicator active" data-index="0"></span>
+                <span class="indicator" data-index="1"></span>
+                <span class="indicator" data-index="2"></span>
+                <span class="indicator" data-index="3"></span>
+                <span class="indicator" data-index="4"></span>
+                <span class="indicator" data-index="5"></span>
+                <span class="indicator" data-index="6"></span>
+                <span class="indicator" data-index="7"></span>
+                <span class="indicator" data-index="8"></span>
+                <span class="indicator" data-index="9"></span>
+                <span class="indicator" data-index="10"></span>
+                <span class="indicator" data-index="11"></span>
+            </div>
+        </div>
+        
+        <div class="status">
+            <p>카드 <span id="current-card">1</span> / 12 • SWIPE FOR MORE</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            const indicators = document.querySelectorAll('.indicator');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const currentCardText = document.getElementById('current-card');
+            let currentCardIndex = 0;
+            
+            // 카드 업데이트 함수
+            function updateCard(index) {
+                cards.forEach(card => card.classList.remove('active'));
+                indicators.forEach(ind => ind.classList.remove('active'));
+                
+                cards[index].classList.add('active');
+                indicators[index].classList.add('active');
+                currentCardText.textContent = index + 1;
+                currentCardIndex = index;
+            }
+            
+            // 이전 카드로 이동
+            function prevCard() {
+                let newIndex = currentCardIndex - 1;
+                if (newIndex < 0) newIndex = cards.length - 1;
+                updateCard(newIndex);
+            }
+            
+            // 다음 카드로 이동
+            function nextCard() {
+                let newIndex = currentCardIndex + 1;
+                if (newIndex >= cards.length) newIndex = 0;
+                updateCard(newIndex);
+            }
+            
+            // 이벤트 리스너 설정
+            prevBtn.addEventListener('click', prevCard);
+            nextBtn.addEventListener('click', nextCard);
+            
+            // 인디케이터 클릭 이벤트
+            indicators.forEach(indicator => {
+                indicator.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    updateCard(index);
+                });
+            });
+            
+            // 키보드 화살표 키 지원
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') prevCard();
+                if (e.key === 'ArrowRight') nextCard();
+            });
+            
+            // 터치 이벤트 처리
+            const slider = document.querySelector('.card-slider');
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            slider.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            slider.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) {
+                    nextCard(); // 왼쪽으로 스와이프 -> 다음 카드
+                }
+                if (touchEndX > touchStartX + 50) {
+                    prevCard(); // 오른쪽으로 스와이프 -> 이전 카드
+                }
+            }
+            
+            // 자동 슬라이드 (5초마다)
+            let autoSlide = setInterval(nextCard, 5000);
+            
+            // 사용자 상호작용 시 자동 슬라이드 일시 중지 후 재시작
+            function resetAutoSlide() {
+                clearInterval(autoSlide);
+                autoSlide = setInterval(nextCard, 5000);
+            }
+            
+            prevBtn.addEventListener('click', resetAutoSlide);
+            nextBtn.addEventListener('click', resetAutoSlide);
+            indicators.forEach(ind => ind.addEventListener('click', resetAutoSlide));
+            slider.addEventListener('touchend', resetAutoSlide);
+        });
+    </script>
+</body>
+</html>
