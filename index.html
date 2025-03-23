@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>윤석열 대통령 계엄령 선포부터 탄핵 심판까지</title>
+    
+    <!-- 페이스북 공유 최적화 메타 태그 -->
+    <meta property="og:title" content="윤석열 대통령 계엄령 선포부터 탄핵 심판까지">
+    <meta property="og:description" content="2024년 12월 3일부터 2025년 3월 23일까지 대한민국 헌정사의 중요한 시기를 카드 뉴스로 정리했습니다.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/waterfirst/card_news/main/first-card-image.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://waterfirst.github.io/card_news/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="대한민국 헌정사 카드뉴스">
+    
+    <!-- 일반 소셜 미디어 공유 메타 태그 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="윤석열 대통령 계엄령 선포부터 탄핵 심판까지">
+    <meta name="twitter:description" content="2024년 12월 3일부터 2025년 3월 23일까지 대한민국 헌정사의 중요한 시기를 카드 뉴스로 정리했습니다.">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/waterfirst/card_news/main/first-card-image.svg">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         
@@ -354,7 +370,49 @@
     </div>
 
     <script>
+        // 첫 번째 카드의 대표 이미지 생성 및 저장 기능
+        function generateFirstCardImage() {
+            const firstCard = document.getElementById('card-0');
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // 캔버스 크기 설정
+            canvas.width = 1200;
+            canvas.height = 630; // 소셜 미디어 공유 이미지에 적합한 비율
+            
+            // 그라데이션 배경 그리기
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#1E1E1E');
+            gradient.addColorStop(1, '#383838');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // 텍스트 설정
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 60px Pretendard, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('윤석열 대통령 계엄령 선포부터 탄핵 심판까지', canvas.width/2, 200);
+            
+            ctx.font = '40px Pretendard, sans-serif';
+            ctx.fillText('2024년 12월 3일부터 2025년 3월 23일까지', canvas.width/2, 300);
+            
+            // 이모지 추가
+            ctx.font = '120px Arial';
+            ctx.fillText('📅', canvas.width/2, 450);
+            
+            // 이미지 URL 생성
+            const imageUrl = canvas.toDataURL('image/png');
+            
+            // 메타 태그 업데이트
+            document.querySelector('meta[property="og:image"]').setAttribute('content', imageUrl);
+            document.querySelector('meta[name="twitter:image"]').setAttribute('content', imageUrl);
+            
+            return imageUrl;
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
+            // 첫 번째 카드 이미지 생성
+            const cardImageUrl = generateFirstCardImage();
             const cards = document.querySelectorAll('.card');
             const indicators = document.querySelectorAll('.indicator');
             const prevBtn = document.getElementById('prev-btn');
@@ -441,6 +499,9 @@
             nextBtn.addEventListener('click', resetAutoSlide);
             indicators.forEach(ind => ind.addEventListener('click', resetAutoSlide));
             slider.addEventListener('touchend', resetAutoSlide);
+            
+            // 디버그용: 콘솔에 이미지 URL 출력
+            console.log('대표 이미지 URL:', cardImageUrl);
         });
     </script>
 </body>
